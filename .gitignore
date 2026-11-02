@@ -1,0 +1,13 @@
+node_modules/
+.token
+state.json
+config.json
+logs/
+.env
+
+# Runtime files the scripts write locally. Snapshots and the trade log can
+# include account history, so they stay out of the repo with the items above.
+trades.jsonl
+snapshot.json
+samples.json
+*.log

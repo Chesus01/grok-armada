@@ -1,0 +1,65 @@
+{
+ "rsiMax": 65,
+ "topupHourET": 16,
+ "topupMargin": 15,
+ "tier": "easy",
+ "levMin": 2,
+ "levMax": 2,
+ "maxSlots": 2,
+ "margin": 15,
+ "strongMargin": 20,
+ "tpPct": 5,
+ "slPct": 2.5,
+ "breakevenPct": 3,
+ "dailyHaltPct": -5,
+ "killPct": 15,
+ "maxLossStreak": 5,
+ "maxTradesDay": 8,
+ "maxMarginPct": 60,
+ "minScore": 0.3,
+ "strongScore": 0.55,
+ "rotScore": 0.35,
+ "maxSameDirCrypto": 1,
+ "staleH1": 3,
+ "stalePct1": 1.5,
+ "staleH2": 6,
+ "stalePct2": 2.5,
+ "cooldownH": 2,
+ "volGoal": 0,
+ "markets": {
+  "BTC": {
+   "src": "k",
+   "id": "XBTUSD",
+   "crypto": true
+  },
+  "ETH": {
+   "src": "k",
+   "id": "ETHUSD",
+   "crypto": true
+  },
+  "SOL": {
+   "src": "k",
+   "id": "SOLUSD",
+   "crypto": true
+  },
+  "XRP": {
+   "src": "k",
+   "id": "XRPUSD",
+   "crypto": true
+  },
+  "BNB": {
+   "src": "k",
+   "id": "BNBUSD",
+   "crypto": true
+  },
+  "LINK": {
+   "src": "k",
+   "id": "LINKUSD",
+   "crypto": true
+  },
+  "XAU": {
+   "src": "k",
+   "id": "PAXGUSD"
+  }
+ }
+}

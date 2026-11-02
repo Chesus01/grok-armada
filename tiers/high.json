@@ -1,0 +1,186 @@
+{
+ "rsiMax": 75,
+ "topupHourET": 16,
+ "topupMargin": 20,
+ "tier": "high",
+ "levMin": 5,
+ "levMax": 8,
+ "maxSlots": 5,
+ "margin": 25,
+ "strongMargin": 30,
+ "tpPct": 12,
+ "slPct": 6,
+ "breakevenPct": 5,
+ "dailyHaltPct": -15,
+ "killPct": 25,
+ "maxLossStreak": 10,
+ "maxTradesDay": 30,
+ "maxMarginPct": 90,
+ "minScore": 0.18,
+ "strongScore": 0.45,
+ "rotScore": 0.22,
+ "maxSameDirCrypto": 3,
+ "staleH1": 1,
+ "stalePct1": 2,
+ "staleH2": 3,
+ "stalePct2": 3,
+ "cooldownH": 0,
+ "volGoal": 2000,
+ "markets": {
+  "BTC": {
+   "src": "k",
+   "id": "XBTUSD",
+   "crypto": true
+  },
+  "ETH": {
+   "src": "k",
+   "id": "ETHUSD",
+   "crypto": true
+  },
+  "SOL": {
+   "src": "k",
+   "id": "SOLUSD",
+   "crypto": true
+  },
+  "XRP": {
+   "src": "k",
+   "id": "XRPUSD",
+   "crypto": true
+  },
+  "BNB": {
+   "src": "k",
+   "id": "BNBUSD",
+   "crypto": true
+  },
+  "LINK": {
+   "src": "k",
+   "id": "LINKUSD",
+   "crypto": true
+  },
+  "XAU": {
+   "src": "k",
+   "id": "PAXGUSD"
+  },
+  "DOGE": {
+   "src": "k",
+   "id": "XDGUSD",
+   "crypto": true
+  },
+  "SUI": {
+   "src": "k",
+   "id": "SUIUSD",
+   "crypto": true
+  },
+  "AVAX": {
+   "src": "k",
+   "id": "AVAXUSD",
+   "crypto": true
+  },
+  "HYPE": {
+   "src": "k",
+   "id": "HYPEUSD",
+   "crypto": true
+  },
+  "ZEC": {
+   "src": "k",
+   "id": "ZECUSD",
+   "crypto": true
+  },
+  "LTC": {
+   "src": "k",
+   "id": "LTCUSD",
+   "crypto": true
+  },
+  "ADA": {
+   "src": "k",
+   "id": "ADAUSD",
+   "crypto": true
+  },
+  "QQQ": {
+   "src": "y",
+   "id": "QQQ"
+  },
+  "SPY": {
+   "src": "y",
+   "id": "SPY"
+  },
+  "AAVE": {
+   "src": "k",
+   "id": "AAVEUSD",
+   "crypto": true
+  },
+  "NEAR": {
+   "src": "k",
+   "id": "NEARUSD",
+   "crypto": true
+  },
+  "TAO": {
+   "src": "k",
+   "id": "TAOUSD",
+   "crypto": true
+  },
+  "ENA": {
+   "src": "k",
+   "id": "ENAUSD",
+   "crypto": true
+  },
+  "XAG": {
+   "src": "y",
+   "id": "SI=F"
+  },
+  "NVDA": {
+   "src": "y",
+   "id": "NVDA"
+  },
+  "TSLA": {
+   "src": "y",
+   "id": "TSLA"
+  },
+  "AAPL": {
+   "src": "y",
+   "id": "AAPL"
+  },
+  "MSFT": {
+   "src": "y",
+   "id": "MSFT"
+  },
+  "AMZN": {
+   "src": "y",
+   "id": "AMZN"
+  },
+  "GOOGL": {
+   "src": "y",
+   "id": "GOOGL"
+  },
+  "META": {
+   "src": "y",
+   "id": "META"
+  },
+  "AMD": {
+   "src": "y",
+   "id": "AMD"
+  },
+  "PLTR": {
+   "src": "y",
+   "id": "PLTR"
+  },
+  "COIN": {
+   "src": "y",
+   "id": "COIN"
+  },
+  "MSTR": {
+   "src": "y",
+   "id": "MSTR"
+  },
+  "HOOD": {
+   "src": "y",
+   "id": "HOOD"
+  },
+  "OPENAI": {
+   "src": "i"
+  },
+  "ANTHROPIC": {
+   "src": "i"
+  }
+ }
+}

@@ -1,0 +1,108 @@
+{
+ "rsiMax": 70,
+ "topupHourET": 16,
+ "topupMargin": 25,
+ "tier": "medium",
+ "levMin": 3,
+ "levMax": 5,
+ "maxSlots": 4,
+ "margin": 30,
+ "strongMargin": 30,
+ "tpPct": 7,
+ "slPct": 3.5,
+ "breakevenPct": 4,
+ "dailyHaltPct": -10,
+ "killPct": 15,
+ "maxLossStreak": 8,
+ "maxTradesDay": 20,
+ "maxMarginPct": 85,
+ "minScore": 0.2,
+ "strongScore": 0.5,
+ "rotScore": 0.25,
+ "maxSameDirCrypto": 2,
+ "staleH1": 1.5,
+ "stalePct1": 1.5,
+ "staleH2": 4,
+ "stalePct2": 2.5,
+ "cooldownH": 0,
+ "volGoal": 1000,
+ "markets": {
+  "BTC": {
+   "src": "k",
+   "id": "XBTUSD",
+   "crypto": true
+  },
+  "ETH": {
+   "src": "k",
+   "id": "ETHUSD",
+   "crypto": true
+  },
+  "SOL": {
+   "src": "k",
+   "id": "SOLUSD",
+   "crypto": true
+  },
+  "XRP": {
+   "src": "k",
+   "id": "XRPUSD",
+   "crypto": true
+  },
+  "BNB": {
+   "src": "k",
+   "id": "BNBUSD",
+   "crypto": true
+  },
+  "LINK": {
+   "src": "k",
+   "id": "LINKUSD",
+   "crypto": true
+  },
+  "XAU": {
+   "src": "k",
+   "id": "PAXGUSD"
+  },
+  "DOGE": {
+   "src": "k",
+   "id": "XDGUSD",
+   "crypto": true
+  },
+  "SUI": {
+   "src": "k",
+   "id": "SUIUSD",
+   "crypto": true
+  },
+  "AVAX": {
+   "src": "k",
+   "id": "AVAXUSD",
+   "crypto": true
+  },
+  "HYPE": {
+   "src": "k",
+   "id": "HYPEUSD",
+   "crypto": true
+  },
+  "ZEC": {
+   "src": "k",
+   "id": "ZECUSD",
+   "crypto": true
+  },
+  "LTC": {
+   "src": "k",
+   "id": "LTCUSD",
+   "crypto": true
+  },
+  "ADA": {
+   "src": "k",
+   "id": "ADAUSD",
+   "crypto": true
+  },
+  "QQQ": {
+   "src": "y",
+   "id": "QQQ"
+  },
+  "SPY": {
+   "src": "y",
+   "id": "SPY"
+  }
+ }
+}

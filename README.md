@@ -1,1 +1,75 @@
-# grok-armada
+# Grok Armada
+
+Grok Armada is a kit of Grok Bot trading bots for [Imperial](https://imperial.trade) perpetuals (Solana perps), in Easy, Medium, and High risk tiers.
+
+> **Not financial advice, perps can lose money, use a fresh dedicated wallet with only what you can afford to lose.**
+
+Perpetual futures can liquidate a position and can take the whole balance of the wallet that funds them. Create a fresh wallet used only for this bot, and deposit only what you can afford to lose.
+
+## Sign up
+
+Sign up via [https://imperial.trade/i/chesus](https://imperial.trade/i/chesus) (referral code `chesus`).
+
+## Quick start
+
+Node.js 18 or newer.
+
+Copy `tiers/<tier>.json` to `config.json` in the `scripts/` folder (`easy`, `medium`, or `high`). `setup.js` and `monitor.js` load that `scripts/config.json`.
+
+```bash
+cp tiers/easy.json scripts/config.json
+export IMPERIAL_SOL_PRIVATE_KEY="your Solana private key"
+node scripts/setup.js
+node scripts/monitor.js --dry
+```
+
+`node scripts/setup.js` installs the dependencies in `scripts/`, checks the tier file, signs in with a wallet signature, and reports Imperial USDC plus wallet SOL. `node scripts/monitor.js --dry` scores markets and prints one JSON line with the orders it would send. `--dry` keeps that run read-only.
+
+Use `tiers/medium.json` or `tiers/high.json` the same way to switch tiers. A file named `STOP` in `scripts/` pauses new trades on later live runs.
+
+## Private key
+
+The key is only read from the environment (`IMPERIAL_SOL_PRIVATE_KEY`) and never logged. Pass it in the environment of the process. A login token is cached in `scripts/.token` with mode `0600`. That file, `config.json`, `.env`, and local state are listed in `.gitignore`.
+
+## Tier comparison
+
+Numbers are the fields in `tiers/easy.json`, `tiers/medium.json`, and `tiers/high.json`.
+
+Take-profit, stop-loss, and the breakeven move are percent of margin (return on equity). The price move that reaches a stop is about that percent divided by leverage, so Easy’s 2.5% stop at 2× is about a 1.25% price move.
+
+| | Easy | Medium | High |
+| --- | --- | --- | --- |
+| Leverage | 2× | 3–5× | 5–8× |
+| Open positions (`maxSlots`) | 2 | 4 | 5 |
+| Margin / strong margin | $15 / $20 | $30 / $30 | $25 / $30 |
+| Take-profit (`tpPct`) | 5% | 7% | 12% |
+| Stop-loss (`slPct`) | 2.5% | 3.5% | 6% |
+| Breakeven (`breakevenPct`) | 3% | 4% | 5% |
+| Daily halt (`dailyHaltPct`) | −5% | −10% | −15% |
+| Kill switch (`killPct`, `maxLossStreak`) | −15% from the start, or 5 losses in a row | −15% from the start, or 8 losses in a row | −25% from the start, or 10 losses in a row |
+| Max trades / day | 8 | 20 | 30 |
+| Max margin in use | 60% | 85% | 90% |
+| Min score / strong score | 0.30 / 0.55 | 0.20 / 0.50 | 0.18 / 0.45 |
+| Same-direction crypto cap | 1 | 2 | 3 |
+| RSI cap (`rsiMax`) | 65 | 70 | 75 |
+| Cooldown after a stop | 2 hours | none (`cooldownH` 0) | none (`cooldownH` 0) |
+| Volume goal | none (`volGoal` 0) | $1,000 | $2,000 |
+| Top-up margin | $15 | $25 | $20 |
+| Stale rotation | 3h within 1.5%, or 6h within 2.5% | 1.5h within 1.5%, or 4h within 2.5% | 1h within 2%, or 3h within 3% |
+| Markets | 7 | 16 | 35 |
+
+Top-up margin applies after 16:00 America/New_York when `volGoal` is above zero and today’s volume is still under that goal. Easy leaves `volGoal` at 0, so it stays on the base margin.
+
+**Easy:** BTC, ETH, SOL, XRP, BNB, LINK, XAU.
+
+**Medium:** the Easy markets, plus DOGE, SUI, AVAX, HYPE, ZEC, LTC, ADA, QQQ, SPY.
+
+**High:** the Medium markets, plus AAVE, NEAR, TAO, ENA, XAG, NVDA, TSLA, AAPL, MSFT, AMZN, GOOGL, META, AMD, PLTR, COIN, MSTR, HOOD, OPENAI, ANTHROPIC.
+
+## Layout
+
+- `scripts/` — auth, setup, account, deposit, scoring, orders, and the hourly monitor
+- `tiers/` — Easy, Medium, and High configs
+- `skills/` — onboarding drafts, one `SKILL.md` per tier
+
+Onboarding notes for a Grok Bot live in `skills/easy/SKILL.md`, `skills/medium/SKILL.md`, and `skills/high/SKILL.md`.
