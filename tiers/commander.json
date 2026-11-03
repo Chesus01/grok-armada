@@ -1,7 +1,7 @@
 {
- "tier": "medium",
- "keyEnv": "ARMADA_MEDIUM_SOL_PRIVATE_KEY",
- "installDir": "~/armada-medium",
+ "tier": "commander",
+ "keyEnv": "EMPIRE_COMMANDER_SOL_PRIVATE_KEY",
+ "installDir": "~/empire-commander",
  "wallet": null,
  "rsiMax": 70,
  "topupHourET": 16,

@@ -1,7 +1,7 @@
 {
- "tier": "high",
- "keyEnv": "ARMADA_HIGH_SOL_PRIVATE_KEY",
- "installDir": "~/armada-high",
+ "tier": "conqueror",
+ "keyEnv": "EMPIRE_CONQUEROR_SOL_PRIVATE_KEY",
+ "installDir": "~/empire-conqueror",
  "wallet": null,
  "rsiMax": 75,
  "topupHourET": 16,

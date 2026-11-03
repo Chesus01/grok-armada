@@ -1,11 +1,11 @@
-// Key is read ONLY from the env var named by config.json "keyEnv" (e.g. ARMADA_EASY_SOL_PRIVATE_KEY). Never printed.
+// Key is read ONLY from the env var named by config.json "keyEnv" (e.g. EMPIRE_CADET_SOL_PRIVATE_KEY). Never printed.
 // No fallback to any other variable. If config.json "wallet" is set, the key's pubkey must match it or every script aborts.
 // JWT cached in .token (0600) inside this tier's folder, tagged with its wallet.
 const nacl=require('tweetnacl'),bs58=require('bs58').default||require('bs58'),fs=require('fs');
 const API='https://api.imperial.trade/api/v1',TOK=__dirname+'/.token',CFG=__dirname+'/config.json';
 function abort(msg,code=3){console.log(JSON.stringify({step:'abort',ok:false,msg}));process.exit(code);}
 function rawCfg(){try{return JSON.parse(fs.readFileSync(CFG))}catch{abort('config.json missing - copy your tier file to config.json',1)}}
-function keyEnv(){const c=rawCfg(),k=c.keyEnv,want='ARMADA_'+String(c.tier||'').toUpperCase()+'_SOL_PRIVATE_KEY';if(k!==want)abort(`config.json keyEnv must be ${want} for tier ${c.tier}`,1);return k;}
+function keyEnv(){const c=rawCfg(),k=c.keyEnv,want='EMPIRE_'+String(c.tier||'').toUpperCase()+'_SOL_PRIVATE_KEY';if(k!==want)abort(`config.json keyEnv must be ${want} for tier ${c.tier}`,1);return k;}
 const hasKey=()=>!!(process.env[keyEnv()]||'').trim();
 function keypairUnchecked(){const k=keyEnv(),raw=(process.env[k]||'').trim();if(!raw)abort(k+' not set - add it through the secure secret box, never in chat',2);
  let b;try{b=raw.startsWith('[')?Uint8Array.from(JSON.parse(raw)):bs58.decode(raw);}catch{abort('key format not recognised (expect base58 or [..] array)',2)}

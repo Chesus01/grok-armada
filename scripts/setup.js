@@ -15,7 +15,7 @@ const out=(k,v)=>console.log(JSON.stringify({step:k,...v}));
  const kw=bs58.encode(keypairUnchecked().publicKey),RC=rawCfg();
  if(!RC.wallet){RC.wallet=kw;fs.writeFileSync(D+'/config.json',JSON.stringify(RC,null,1));out('pin',{ok:true,wallet:kw,msg:'wallet recorded in config.json; scripts now refuse any other key'});}
  const w=pubkey();out('key',{ok:true,wallet:w});
- try{const H=require('os').homedir(),me=require('path').resolve(D,'..');for(const d of fs.readdirSync(H).filter(x=>/^armada-(easy|medium|high)$/.test(x))){const p=require('path').join(H,d);if(p===me)continue;try{const o=JSON.parse(fs.readFileSync(p+'/scripts/config.json'));if(o.wallet===w)out('shared_wallet',{ok:false,warn:true,other:d,msg:'another tier uses this same wallet - use a separate trading account per tier'});}catch{}}}catch{}
+ try{const H=require('os').homedir(),me=require('path').resolve(D,'..');for(const d of fs.readdirSync(H).filter(x=>/^empire-(cadet|commander|conqueror)$/.test(x))){const p=require('path').join(H,d);if(p===me)continue;try{const o=JSON.parse(fs.readFileSync(p+'/scripts/config.json'));if(o.wallet===w)out('shared_wallet',{ok:false,warn:true,other:d,msg:'another tier uses this same wallet - use a separate trading account per tier'});}catch{}}}catch{}
  const j=await login();out('login',{ok:true,expires:new Date(j.expiresAt*1000).toISOString()});
  const b=await api('/mobile/balances'),usdc=(b.body.profiles||[]).reduce((s,p)=>s+p.usdc/1e6,0);
  let sol=null;try{const r=await fetch(process.env.SOL_RPC||'https://api.mainnet-beta.solana.com',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:1,method:'getBalance',params:[w]})});sol=(await r.json()).result.value/1e9;}catch{}

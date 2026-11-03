@@ -1,7 +1,7 @@
 {
- "tier": "easy",
- "keyEnv": "ARMADA_EASY_SOL_PRIVATE_KEY",
- "installDir": "~/armada-easy",
+ "tier": "cadet",
+ "keyEnv": "EMPIRE_CADET_SOL_PRIVATE_KEY",
+ "installDir": "~/empire-cadet",
  "wallet": null,
  "rsiMax": 65,
  "topupHourET": 16,

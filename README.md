@@ -1,6 +1,6 @@
-# Grok Armada
+# Grok Empire
 
-Grok Armada is a kit of Grok Bot trading bots for [Imperial](https://imperial.trade) perpetuals (Solana perps), in Easy, Medium, and High risk tiers.
+Grok Empire is a kit of Grok Bot trading bots for [Imperial](https://imperial.trade) perpetuals (Solana perps), in Cadet, Commander, and Conqueror tiers (low, medium and high risk).
 
 > **Not financial advice, perps can lose money, use a fresh dedicated wallet with only what you can afford to lose.**
 
@@ -14,20 +14,20 @@ Sign up via [https://imperial.trade/i/chesus](https://imperial.trade/i/chesus) (
 
 Node.js 18 or newer.
 
-Each tier installs into its own folder and reads its own key, so Easy, Medium and High can run side by side on one computer without clashing:
+Each tier installs into its own folder and reads its own key, so Cadet, Commander and Conqueror can run side by side on one computer without clashing:
 
 | Tier | Folder | Key env var (`keyEnv` in the tier file) |
 |---|---|---|
-| Easy | `~/armada-easy` | `ARMADA_EASY_SOL_PRIVATE_KEY` |
-| Medium | `~/armada-medium` | `ARMADA_MEDIUM_SOL_PRIVATE_KEY` |
-| High | `~/armada-high` | `ARMADA_HIGH_SOL_PRIVATE_KEY` |
+| Cadet | `~/empire-cadet` | `EMPIRE_CADET_SOL_PRIVATE_KEY` |
+| Commander | `~/empire-commander` | `EMPIRE_COMMANDER_SOL_PRIVATE_KEY` |
+| Conqueror | `~/empire-conqueror` | `EMPIRE_CONQUEROR_SOL_PRIVATE_KEY` |
 
 ```bash
-T=easy   # or medium / high
-mkdir -p ~/armada-$T && curl -L https://github.com/Chesus01/grok-armada/archive/refs/heads/main.tar.gz | tar xz --strip-components=1 -C ~/armada-$T
-[ -f ~/armada-$T/scripts/config.json ] || cp ~/armada-$T/tiers/$T.json ~/armada-$T/scripts/config.json
-export ARMADA_EASY_SOL_PRIVATE_KEY="your Solana private key"   # name must match the tier
-cd ~/armada-$T/scripts && node setup.js && node monitor.js --dry
+T=cadet   # or commander / conqueror
+mkdir -p ~/empire-$T && curl -L https://github.com/Chesus01/grok-empire/archive/refs/heads/main.tar.gz | tar xz --strip-components=1 -C ~/empire-$T
+[ -f ~/empire-$T/scripts/config.json ] || cp ~/empire-$T/tiers/$T.json ~/empire-$T/scripts/config.json
+export EMPIRE_CADET_SOL_PRIVATE_KEY="your Solana private key"   # name must match the tier
+cd ~/empire-$T/scripts && node setup.js && node monitor.js --dry
 ```
 
 > **Use a different wallet / trading account for each tier.** Two tiers on the same wallet would trade the same balance and fight over each other's positions and loss limits. `setup.js` warns (`shared_wallet`) if it sees another tier folder pinned to the same wallet.
@@ -40,15 +40,15 @@ A file named `STOP` in a tier's `scripts/` folder pauses new trades for that tie
 
 ## Private key
 
-The key is only read from the environment variable named by `keyEnv` in `config.json` (e.g. `ARMADA_EASY_SOL_PRIVATE_KEY`); there is no fallback to any other name, and it is never logged. Pass it in the environment of the process. A login token is cached in `scripts/.token` with mode `0600`. That file, `config.json`, `.env`, and local state are listed in `.gitignore`.
+The key is only read from the environment variable named by `keyEnv` in `config.json` (e.g. `EMPIRE_CADET_SOL_PRIVATE_KEY`); there is no fallback to any other name, and it is never logged. Pass it in the environment of the process. A login token is cached in `scripts/.token` with mode `0600`. That file, `config.json`, `.env`, and local state are listed in `.gitignore`.
 
 ## Tier comparison
 
-Numbers are the fields in `tiers/easy.json`, `tiers/medium.json`, and `tiers/high.json`.
+Numbers are the fields in `tiers/cadet.json`, `tiers/commander.json`, and `tiers/conqueror.json`.
 
-Take-profit, stop-loss, and the breakeven move are percent of margin (return on equity). The price move that reaches a stop is about that percent divided by leverage, so Easy’s 2.5% stop at 2× is about a 1.25% price move.
+Take-profit, stop-loss, and the breakeven move are percent of margin (return on equity). The price move that reaches a stop is about that percent divided by leverage, so Cadet’s 2.5% stop at 2× is about a 1.25% price move.
 
-| | Easy | Medium | High |
+| | Cadet | Commander | Conqueror |
 | --- | --- | --- | --- |
 | Leverage | 2× | 3–5× | 5–8× |
 | Open positions (`maxSlots`) | 2 | 4 | 5 |
@@ -69,13 +69,13 @@ Take-profit, stop-loss, and the breakeven move are percent of margin (return on 
 | Stale rotation | 3h within 1.5%, or 6h within 2.5% | 1.5h within 1.5%, or 4h within 2.5% | 1h within 2%, or 3h within 3% |
 | Markets | 7 | 16 | 35 |
 
-Top-up margin applies after 16:00 America/New_York when `volGoal` is above zero and today’s volume is still under that goal. Easy leaves `volGoal` at 0, so it stays on the base margin.
+Top-up margin applies after 16:00 America/New_York when `volGoal` is above zero and today’s volume is still under that goal. Cadet leaves `volGoal` at 0, so it stays on the base margin.
 
-**Easy:** BTC, ETH, SOL, XRP, BNB, LINK, XAU.
+**Cadet:** BTC, ETH, SOL, XRP, BNB, LINK, XAU.
 
-**Medium:** the Easy markets, plus DOGE, SUI, AVAX, HYPE, ZEC, LTC, ADA, QQQ, SPY.
+**Commander:** the Cadet markets, plus DOGE, SUI, AVAX, HYPE, ZEC, LTC, ADA, QQQ, SPY.
 
-**High:** the Medium markets, plus AAVE, NEAR, TAO, ENA, XAG, NVDA, TSLA, AAPL, MSFT, AMZN, GOOGL, META, AMD, PLTR, COIN, MSTR, HOOD, OPENAI, ANTHROPIC.
+**Conqueror:** the Commander markets, plus AAVE, NEAR, TAO, ENA, XAG, NVDA, TSLA, AAPL, MSFT, AMZN, GOOGL, META, AMD, PLTR, COIN, MSTR, HOOD, OPENAI, ANTHROPIC.
 
 The market counts above are the starter lists. Each tier file also has a `suggested` list of extra markets.
 
@@ -97,8 +97,8 @@ node markets.js add SYM
 ## Layout
 
 - `scripts/` — auth, setup, account, deposit, scoring, orders, the hourly monitor, dashboard data, and suggested markets
-- `tiers/` — Easy, Medium, and High configs
+- `tiers/` — Cadet, Commander, and Conqueror configs
 - `skills/` — onboarding drafts, one `SKILL.md` per tier
 - `dashboard/` — canvas template (`template.tsx`)
 
-Onboarding notes for a Grok Bot live in `skills/easy/SKILL.md`, `skills/medium/SKILL.md`, and `skills/high/SKILL.md`.
+Onboarding notes for a Grok Bot live in `skills/grok-empire-cadet/SKILL.md`, `skills/grok-empire-commander/SKILL.md`, and `skills/grok-empire-conqueror/SKILL.md`.

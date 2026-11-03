@@ -1,1 +1,1 @@
-{"name":"grok-armada","version":"1.0.0","private":true,"type":"commonjs","dependencies":{"@solana/web3.js":"^1.99.0","bs58":"^5.0.0","tweetnacl":"^1.0.3"}}
+{"name":"grok-empire","version":"1.0.0","private":true,"type":"commonjs","dependencies":{"@solana/web3.js":"^1.99.0","bs58":"^5.0.0","tweetnacl":"^1.0.3"}}
