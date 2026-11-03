@@ -66,10 +66,28 @@ Top-up margin applies after 16:00 America/New_York when `volGoal` is above zero 
 
 **High:** the Medium markets, plus AAVE, NEAR, TAO, ENA, XAG, NVDA, TSLA, AAPL, MSFT, AMZN, GOOGL, META, AMD, PLTR, COIN, MSTR, HOOD, OPENAI, ANTHROPIC.
 
+The market counts above are the starter lists. Each tier file also has a `suggested` list of extra markets.
+
+## Dashboard
+
+`dashboard/template.tsx` is the canvas for equity, P&L, volume, open positions, trade history, and the activity log. From the `scripts/` folder, `node dashboard.js` prints one JSON object built from the local snapshot, state, and trade log. Paste its `data` value over the placeholder after `const DATA = /*__DATA__*/` (keep `as any;`). `node dashboard.js --live` also includes season points when `IMPERIAL_SOL_PRIVATE_KEY` is set. The key is never printed.
+
+## Suggested markets
+
+From the `scripts/` folder, list the active markets and the names still available on this tier, then add one:
+
+```bash
+node markets.js
+node markets.js add SYM
+```
+
+`node markets.js add SYM` adds a symbol from that tier's `suggested` list, or puts a removed starter market back. Added markets use the same leverage, size, stops, and daily halt as the rest of the tier. Pre-IPO markets stay capped at 4×.
+
 ## Layout
 
-- `scripts/` — auth, setup, account, deposit, scoring, orders, and the hourly monitor
+- `scripts/` — auth, setup, account, deposit, scoring, orders, the hourly monitor, dashboard data, and suggested markets
 - `tiers/` — Easy, Medium, and High configs
 - `skills/` — onboarding drafts, one `SKILL.md` per tier
+- `dashboard/` — canvas template (`template.tsx`)
 
 Onboarding notes for a Grok Bot live in `skills/easy/SKILL.md`, `skills/medium/SKILL.md`, and `skills/high/SKILL.md`.

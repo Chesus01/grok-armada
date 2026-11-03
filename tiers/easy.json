@@ -61,5 +61,53 @@
    "src": "k",
    "id": "PAXGUSD"
   }
- }
+ },
+ "suggested": {
+  "DOGE": {
+   "src": "k",
+   "id": "XDGUSD",
+   "crypto": true
+  },
+  "SUI": {
+   "src": "k",
+   "id": "SUIUSD",
+   "crypto": true
+  },
+  "AVAX": {
+   "src": "k",
+   "id": "AVAXUSD",
+   "crypto": true
+  },
+  "HYPE": {
+   "src": "k",
+   "id": "HYPEUSD",
+   "crypto": true
+  },
+  "ZEC": {
+   "src": "k",
+   "id": "ZECUSD",
+   "crypto": true
+  },
+  "LTC": {
+   "src": "k",
+   "id": "LTCUSD",
+   "crypto": true
+  },
+  "ADA": {
+   "src": "k",
+   "id": "ADAUSD",
+   "crypto": true
+  },
+  "QQQ": {
+   "src": "y",
+   "id": "QQQ"
+  },
+  "SPY": {
+   "src": "y",
+   "id": "SPY"
+  }
+ },
+ "preIpoMaxLev": 4,
+ "extraMarkets": [],
+ "removeMarkets": []
 }

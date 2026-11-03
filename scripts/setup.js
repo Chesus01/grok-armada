@@ -5,7 +5,7 @@ const out=(k,v)=>console.log(JSON.stringify({step:k,...v}));
  if(+process.versions.node.split('.')[0]<18){out('node',{ok:false,msg:'Node 18+ required'});process.exit(1);}
  try{require.resolve('tweetnacl',{paths:[D]});require.resolve('bs58',{paths:[D]});require.resolve('@solana/web3.js',{paths:[D]});out('deps',{ok:true});}
  catch{out('deps',{installing:true});execSync('npm install --no-audit --no-fund --silent',{cwd:D,stdio:'inherit'});out('deps',{ok:true});}
- let C;try{C=JSON.parse(fs.readFileSync(D+'/config.json'));out('config',{ok:true,tier:C.tier,markets:Object.keys(C.markets).length});}catch(e){out('config',{ok:false,msg:'copy a tier file to config.json: '+e.message});process.exit(1);}
+ let C;try{C=require('./log').cfg();out('config',{ok:true,tier:C.tier,markets:Object.keys(C.markets).length});}catch(e){out('config',{ok:false,msg:'copy a tier file to config.json: '+e.message});process.exit(1);}
  const {markets,login,api,pubkey}=require('./auth');
  if(OFF){out('offline',{ok:true,msg:'skipped network checks'});return;}
  const mk=await markets(),bad=Object.keys(C.markets).filter(s=>{const m=mk.find(x=>x.symbol===s);return !m||m.reduceOnly;});

@@ -182,5 +182,128 @@
   "ANTHROPIC": {
    "src": "i"
   }
- }
+ },
+ "suggested": {
+  "DOT": {
+   "src": "k",
+   "id": "DOTUSD",
+   "crypto": true
+  },
+  "UNI": {
+   "src": "k",
+   "id": "UNIUSD",
+   "crypto": true
+  },
+  "APT": {
+   "src": "k",
+   "id": "APTUSD",
+   "crypto": true
+  },
+  "SEI": {
+   "src": "k",
+   "id": "SEIUSD",
+   "crypto": true
+  },
+  "ARB": {
+   "src": "k",
+   "id": "ARBUSD",
+   "crypto": true
+  },
+  "OP": {
+   "src": "k",
+   "id": "OPUSD",
+   "crypto": true
+  },
+  "TIA": {
+   "src": "k",
+   "id": "TIAUSD",
+   "crypto": true
+  },
+  "BCH": {
+   "src": "k",
+   "id": "BCHUSD",
+   "crypto": true
+  },
+  "XLM": {
+   "src": "k",
+   "id": "XLMUSD",
+   "crypto": true
+  },
+  "WIF": {
+   "src": "k",
+   "id": "WIFUSD",
+   "crypto": true
+  },
+  "JUP": {
+   "src": "k",
+   "id": "JUPUSD",
+   "crypto": true
+  },
+  "ONDO": {
+   "src": "k",
+   "id": "ONDOUSD",
+   "crypto": true
+  },
+  "FIL": {
+   "src": "k",
+   "id": "FILUSD",
+   "crypto": true
+  },
+  "ICP": {
+   "src": "k",
+   "id": "ICPUSD",
+   "crypto": true
+  },
+  "PENDLE": {
+   "src": "k",
+   "id": "PENDLEUSD",
+   "crypto": true
+  },
+  "LDO": {
+   "src": "k",
+   "id": "LDOUSD",
+   "crypto": true
+  },
+  "TRUMP": {
+   "src": "k",
+   "id": "TRUMPUSD",
+   "crypto": true
+  },
+  "HBAR": {
+   "src": "k",
+   "id": "HBARUSD",
+   "crypto": true
+  },
+  "INTC": {
+   "src": "y",
+   "id": "INTC"
+  },
+  "MU": {
+   "src": "y",
+   "id": "MU"
+  },
+  "ORCL": {
+   "src": "y",
+   "id": "ORCL"
+  },
+  "TSM": {
+   "src": "y",
+   "id": "TSM"
+  },
+  "RKLB": {
+   "src": "y",
+   "id": "RKLB"
+  },
+  "CRCL": {
+   "src": "y",
+   "id": "CRCL"
+  },
+  "IWM": {
+   "src": "y",
+   "id": "IWM"
+  }
+ },
+ "preIpoMaxLev": 4,
+ "extraMarkets": [],
+ "removeMarkets": []
 }

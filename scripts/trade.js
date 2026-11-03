@@ -7,6 +7,7 @@ async function open(symbol,side,marginUsd,lev,tpPct,slPct,{dry=false,slip=50}={}
  const mk=await mark(symbol);if(!mk||mk.reduceOnly)throw Error(symbol+' not tradable');
  const px=mk.markPrice,sd=side==='long'?0:1,size=marginUsd*lev;if(size<10)throw Error('below $10 min order');
  if(lev>mk.maxLeverage)throw Error('lev above market max '+mk.maxLeverage);
+ {let C={};try{C=log.cfg()}catch{}if(C.markets?.[symbol]?.src==='i'&&lev>(C.preIpoMaxLev||4))throw Error('pre-IPO markets cap at '+(C.preIpoMaxLev||4)+'x');}
  const tp=sd===0?px*(1+tpPct/100/lev):px*(1-tpPct/100/lev),sl=sd===0?px*(1-slPct/100/lev):px*(1+slPct/100/lev);
  const entry=base(symbol,{side:sd,orderType:0,action:0,triggerCondition:0,triggerPrice:0,sizeUsd:Math.round(size*1e6),collateralAmount:Math.round(marginUsd*1e6),slippageBps:slip,leverage:lev,marketPrice:Math.round(px*1e6)});
  const leg=(price,isTp)=>base(symbol,{side:sd,orderType:isTp?1:2,action:1,closeBps:10000,sizeUsd:0,collateralAmount:0,slippageBps:100,triggerPrice:Math.round(price*1e9),triggerCondition:(sd===0)===isTp?0:1,marketPrice:0});

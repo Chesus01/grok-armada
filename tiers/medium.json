@@ -104,5 +104,82 @@
    "src": "y",
    "id": "SPY"
   }
- }
+ },
+ "suggested": {
+  "AAVE": {
+   "src": "k",
+   "id": "AAVEUSD",
+   "crypto": true
+  },
+  "NEAR": {
+   "src": "k",
+   "id": "NEARUSD",
+   "crypto": true
+  },
+  "TAO": {
+   "src": "k",
+   "id": "TAOUSD",
+   "crypto": true
+  },
+  "ENA": {
+   "src": "k",
+   "id": "ENAUSD",
+   "crypto": true
+  },
+  "XAG": {
+   "src": "y",
+   "id": "SI=F"
+  },
+  "NVDA": {
+   "src": "y",
+   "id": "NVDA"
+  },
+  "TSLA": {
+   "src": "y",
+   "id": "TSLA"
+  },
+  "AAPL": {
+   "src": "y",
+   "id": "AAPL"
+  },
+  "MSFT": {
+   "src": "y",
+   "id": "MSFT"
+  },
+  "AMZN": {
+   "src": "y",
+   "id": "AMZN"
+  },
+  "GOOGL": {
+   "src": "y",
+   "id": "GOOGL"
+  },
+  "META": {
+   "src": "y",
+   "id": "META"
+  },
+  "AMD": {
+   "src": "y",
+   "id": "AMD"
+  },
+  "PLTR": {
+   "src": "y",
+   "id": "PLTR"
+  },
+  "COIN": {
+   "src": "y",
+   "id": "COIN"
+  },
+  "MSTR": {
+   "src": "y",
+   "id": "MSTR"
+  },
+  "HOOD": {
+   "src": "y",
+   "id": "HOOD"
+  }
+ },
+ "preIpoMaxLev": 4,
+ "extraMarkets": [],
+ "removeMarkets": []
 }

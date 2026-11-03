@@ -56,7 +56,7 @@ const isC=s=>!!C.markets[s]?.crypto;
  if(!blockers.length)for(const c of passing.slice(0,slots)){const a=Math.abs(c.score);
   const m=a>=C.strongScore?C.strongMargin:topup?C.topupMargin:C.margin;if(m>marginLeft||m>cash-1){c.why='margin cap';break;}
   let lev=C.levMin+Math.round((C.levMax-C.levMin)*Math.min(1,Math.max(0,(a-C.minScore)/(C.strongScore-C.minScore))));
-  while(lev>C.levMin&&C.slPct/lev<c.atr)lev--;lev=Math.min(lev,Math.floor(M[c.symbol].maxLeverage));
+  while(lev>C.levMin&&C.slPct/lev<c.atr)lev--;lev=Math.min(lev,Math.floor(M[c.symbol].maxLeverage));if(C.markets[c.symbol]?.src==='i')lev=Math.min(lev,C.preIpoMaxLev||4);
   if(DRY){placed.push({symbol:c.symbol,dir:c.dir,lev,margin:m,dry:true});marginLeft-=m;continue;}
   const r=await openTrade(c.symbol,c.dir,m,lev,C.tpPct,C.slPct);const ok=r.result?.entry?.success&&r.result.closeOrders.every(x=>x.success);
   if(r.result?.entry?.success){st.tradesToday=(st.tradesToday||0)+1;marginLeft-=m;placed.push({symbol:c.symbol,dir:c.dir,lev,margin:m,entry:r.px,tp:r.tp,sl:r.sl});events.push(`opened ${c.symbol} ${c.dir} ${lev}x $${m} @${r.px} TP ${r.tp} SL ${r.sl}`);if(!ok)alerts.push(`${c.symbol} TP/SL leg failed!`);}
