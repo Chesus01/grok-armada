@@ -1,7 +1,7 @@
 import { Page, Section, Text, Metrics, Table, Properties, Grid, Status } from "grok/canvas";
 
 // Grok Armada trading dashboard template.
-// To build or refresh: run `node dashboard.js` in ~/armada/scripts and paste its "data" object
+// To build or refresh: run `node dashboard.js` in ~/armada-<tier>/scripts and paste its "data" object
 // in place of the placeholder below (keep `const DATA = ` and the semicolon). Nothing else changes.
 const DATA = /*__DATA__*/ {"updated":"","tier":"","status":"not run yet","lastRun":"","lastError":"","equity":0,"startEquity":0,"totalPnl":0,"dayPct":0,"realizedPnl":0,"unrealizedPnl":0,"volume":0,"volToday":0,"volGoal":0,"fees":0,"points":null,"tradesToday":0,"lossStreak":0,"limits":{},"markets":[],"regime":null,"top":[],"open":[],"history":[],"events":[]} as any;
 

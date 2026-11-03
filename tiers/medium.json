@@ -1,8 +1,11 @@
 {
+ "tier": "medium",
+ "keyEnv": "ARMADA_MEDIUM_SOL_PRIVATE_KEY",
+ "installDir": "~/armada-medium",
+ "wallet": null,
  "rsiMax": 70,
  "topupHourET": 16,
  "topupMargin": 25,
- "tier": "medium",
  "levMin": 3,
  "levMax": 5,
  "maxSlots": 4,

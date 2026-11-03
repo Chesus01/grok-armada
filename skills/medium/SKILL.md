@@ -3,7 +3,8 @@ name: grok-armada-medium
 description: >-
   Getting started with the Grok Armada Medium trading bot for imperial.trade
   perps. Use when the owner is new, says "get started" or "set me up", or asks
-  how trading, funding, the wallet key or the hourly check works.
+  how trading, funding, the wallet key, the dashboard, adding markets or the
+  hourly check works.
 ---
 # Grok Armada — Medium tier
 
@@ -40,23 +41,23 @@ If their answers don't fit this tier, say so kindly and suggest the better tier.
 
 ## 5. Give me trading access safely
 - In Phantom: **Settings > (the trading account) > Show Private Key**, enter the password, copy the key.
-- Add it ONLY through the secure secret box I open, saved as `IMPERIAL_SOL_PRIVATE_KEY`. Use the secret request tool for this. **Never paste the key in chat.** If they paste it in chat anyway, tell them to move funds to a new wallet.
+- Add it ONLY through the secure secret box I open, saved as `ARMADA_MEDIUM_SOL_PRIVATE_KEY`. Use the secret request tool for this. **Never paste the key in chat.** If they paste it in chat anyway, tell them to move funds to a new wallet.
 - Never ask for, print, log or echo the key. Scripts read it from the environment only.
 
 ## 6. Install and verify
-- Download the kit: `curl -L https://github.com/Chesus01/grok-armada/archive/refs/heads/main.tar.gz | tar xz && mv grok-armada-main ~/armada`, then `cp ~/armada/tiers/medium.json ~/armada/scripts/config.json`.
-- Run `node setup.js` in `~/armada/scripts`. It installs dependencies, logs in with a wallet signature and checks the balance. It places no trades. Exit 2 means the key is missing. Read the JSON steps back in plain words.
+- Download the kit (its own folder, so tiers never clash): `mkdir -p ~/armada-medium && curl -L https://github.com/Chesus01/grok-armada/archive/refs/heads/main.tar.gz | tar xz --strip-components=1 -C ~/armada-medium && [ -f ~/armada-medium/scripts/config.json ] || cp ~/armada-medium/tiers/medium.json ~/armada-medium/scripts/config.json`. Setup saves the wallet address and every script stops if the key ever belongs to a different wallet. If they also run another Armada tier, they must use a different trading account for each.
+- Run `node setup.js` in `~/armada-medium/scripts`. It installs dependencies, logs in with a wallet signature and checks the balance. It places no trades. Exit 2 means the key is missing. Read the JSON steps back in plain words.
 - If balance is low, help them deposit (the Imperial site, or `node deposit.js <usdc>`).
 - **Offer more markets:** "Your starter list is set. Want to add any markets?" Run `node markets.js` and show the `suggested` list in one line. If they pick some, run `node markets.js add SYM SYM ...`; to drop one, `node markets.js remove SYM`. No is a fine answer.
 
 ## 7. First trade
 - Run `node monitor.js --dry` and explain the top picks in one or two lines.
 - If they chose "approve each trade", get a yes before every open. Then run `node monitor.js`. Every trade is sent with its take-profit and stop on the exchange. Confirm both are there with `node account.js`.
-- **Build the dashboard right after the first trade opens:** run `node dashboard.js --live` in `~/armada/scripts`. Take `~/armada/dashboard/template.tsx`, replace the placeholder object after `const DATA = /*__DATA__*/` with the output's `data` object (keep the `as any;`), and save it as a Page with WriteCanvas titled "Grok Armada Dashboard". Remember its canvas id and link, and send the owner the link. It shows equity, total and today's P&L, volume vs goal, open positions with entry/TP/SL/P&L, trade history, an activity log, points and the safety limits. Never put the key or wallet secrets on it.
-- Manual close: `node trade.js close SYMBOL long|short`. Pause new trades: create a file named `STOP` in `~/armada/scripts`.
+- **Build the dashboard right after the first trade opens:** run `node dashboard.js --live` in `~/armada-medium/scripts`. Take `~/armada-medium/dashboard/template.tsx`, replace the placeholder object after `const DATA = /*__DATA__*/` with the output's `data` object (keep the `as any;`), and save it as a Page with WriteCanvas titled "Grok Armada Dashboard". Remember its canvas id and link, and send the owner the link. It shows equity, total and today's P&L, volume vs goal, open positions with entry/TP/SL/P&L, trade history, an activity log, points and the safety limits. Never put the key or wallet secrets on it.
+- Manual close: `node trade.js close SYMBOL long|short`. Pause new trades: create a file named `STOP` in `~/armada-medium/scripts`.
 
 ## 8. Hourly check routine
-Create an hourly routine: `cd ~/armada/scripts && node monitor.js`. If the output has `"event":false`, stay silent. If `"event":true`, send a short note: what opened or closed, P&L, equity. If they chose approve-each-trade, run `--dry` hourly instead and ask before placing.
+Create an hourly routine: `cd ~/armada-medium/scripts && node monitor.js`. If the output has `"event":false`, stay silent. If `"event":true`, send a short note: what opened or closed, P&L, equity. If they chose approve-each-trade, run `--dry` hourly instead and ask before placing.
 Then, in the same routine run, `node dashboard.js --live`. Only if it prints `"changed":true`, update the dashboard Page with EditCanvas (replace just the DATA object; use WriteCanvas with the same canvas id if the edit fails). If `"changed":false`, skip it to keep usage low. Don't message the owner about dashboard updates.
 Offer an optional 8 AM morning report: equity, yesterday's P&L, open trades, volume and points (`node account.js`).
 

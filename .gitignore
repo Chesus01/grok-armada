@@ -11,3 +11,4 @@ trades.jsonl
 snapshot.json
 samples.json
 *.log
+dashboard.hash.json

@@ -1,8 +1,11 @@
 {
+ "tier": "high",
+ "keyEnv": "ARMADA_HIGH_SOL_PRIVATE_KEY",
+ "installDir": "~/armada-high",
+ "wallet": null,
  "rsiMax": 75,
  "topupHourET": 16,
  "topupMargin": 20,
- "tier": "high",
  "levMin": 5,
  "levMax": 8,
  "maxSlots": 5,

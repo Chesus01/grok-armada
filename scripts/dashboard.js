@@ -1,6 +1,6 @@
 // node dashboard.js [--live]  -> prints {"changed":bool,"data":{...}} for the dashboard canvas DATA block.
 // Reads only local files written by monitor.js (snapshot.json, state.json, trades.jsonl) + config.json. No key needed.
-// --live also fetches season points (needs IMPERIAL_SOL_PRIVATE_KEY; never printed). "changed" compares to the last run
+// --live also fetches season points (needs the key named by config.json keyEnv; never printed). "changed" compares to the last run
 // (ignoring timestamps/marks) so the hourly routine only rewrites the canvas when something real changed.
 const fs=require('fs'),crypto=require('crypto'),D=__dirname,{cfg,state}=require('./log');
 const rd=(f,d)=>{try{return JSON.parse(fs.readFileSync(D+'/'+f))}catch{return d}};
@@ -14,7 +14,7 @@ const r2=x=>+(+x||0).toFixed(2),nyDay=t=>new Date(t).toLocaleDateString('en-CA',
  const ev=fs.existsSync(D+'/trades.jsonl')?fs.readFileSync(D+'/trades.jsonl','utf8').trim().split('\n').filter(Boolean).slice(-25).map(l=>{try{const e=JSON.parse(l);
   return {time:fmt(e.ts),what:e.type,detail:e.type==='open'?`${e.symbol} ${e.side} ${e.lev}x $${e.marginUsd} @${e.px} TP ${e.tp} SL ${e.sl}`:e.type==='closed'?`${e.asset} ${e.side} ${r2(e.pnl)>=0?'+':''}$${r2(e.pnl)}${e.reason?' ('+e.reason+')':''}`:e.type==='close'?`${e.symbol} ${e.side} manual close`:(e.why||'')}}catch{return null}}).filter(Boolean).reverse():[];
  let points=null;
- if(process.argv.includes('--live')&&(process.env.IMPERIAL_SOL_PRIVATE_KEY||'').trim()){try{const {api}=require('./auth');points=(await api('/mobile/points')).body?.seasonPoints??null;}catch{}}
+ if(process.argv.includes('--live')&&require('./auth').hasKey()){try{const {api}=require('./auth');points=(await api('/mobile/points')).body?.seasonPoints??null;}catch{}}
  const data={updated:fmt(Date.now()),tier:C.tier||'',status:S.status||'not run yet',lastRun:(S.ts||st.lastRun)?fmt(Date.parse(S.ts||st.lastRun)):'',lastError:st.lastError||'',
   equity:r2(S.equity),startEquity:r2(st.startEquity),totalPnl:r2(S.pnl),dayPct:r2(S.dayPct),realizedPnl:r2(realized),unrealizedPnl:r2(unreal),
   volume:r2(vol),volToday:r2(S.volToday),volGoal:C.volGoal||0,fees:+fees.toFixed(3),points,tradesToday:S.tradesToday||0,lossStreak:S.lossStreak||0,

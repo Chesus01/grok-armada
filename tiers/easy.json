@@ -1,8 +1,11 @@
 {
+ "tier": "easy",
+ "keyEnv": "ARMADA_EASY_SOL_PRIVATE_KEY",
+ "installDir": "~/armada-easy",
+ "wallet": null,
  "rsiMax": 65,
  "topupHourET": 16,
  "topupMargin": 15,
- "tier": "easy",
  "levMin": 2,
  "levMax": 2,
  "maxSlots": 2,

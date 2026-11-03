@@ -14,22 +14,33 @@ Sign up via [https://imperial.trade/i/chesus](https://imperial.trade/i/chesus) (
 
 Node.js 18 or newer.
 
-Copy `tiers/<tier>.json` to `config.json` in the `scripts/` folder (`easy`, `medium`, or `high`). `setup.js` and `monitor.js` load that `scripts/config.json`.
+Each tier installs into its own folder and reads its own key, so Easy, Medium and High can run side by side on one computer without clashing:
+
+| Tier | Folder | Key env var (`keyEnv` in the tier file) |
+|---|---|---|
+| Easy | `~/armada-easy` | `ARMADA_EASY_SOL_PRIVATE_KEY` |
+| Medium | `~/armada-medium` | `ARMADA_MEDIUM_SOL_PRIVATE_KEY` |
+| High | `~/armada-high` | `ARMADA_HIGH_SOL_PRIVATE_KEY` |
 
 ```bash
-cp tiers/easy.json scripts/config.json
-export IMPERIAL_SOL_PRIVATE_KEY="your Solana private key"
-node scripts/setup.js
-node scripts/monitor.js --dry
+T=easy   # or medium / high
+mkdir -p ~/armada-$T && curl -L https://github.com/Chesus01/grok-armada/archive/refs/heads/main.tar.gz | tar xz --strip-components=1 -C ~/armada-$T
+[ -f ~/armada-$T/scripts/config.json ] || cp ~/armada-$T/tiers/$T.json ~/armada-$T/scripts/config.json
+export ARMADA_EASY_SOL_PRIVATE_KEY="your Solana private key"   # name must match the tier
+cd ~/armada-$T/scripts && node setup.js && node monitor.js --dry
 ```
+
+> **Use a different wallet / trading account for each tier.** Two tiers on the same wallet would trade the same balance and fight over each other's positions and loss limits. `setup.js` warns (`shared_wallet`) if it sees another tier folder pinned to the same wallet.
+
+**Wallet pinning:** the first time `setup.js` sees a key it records that wallet's address in `config.json` (`wallet`). After that every script aborts (exit 4) if the key's address differs, so a swapped or overwritten key can never silently trade a different account. To deliberately change wallets, clear `wallet` in `config.json` and run setup again.
 
 `node scripts/setup.js` installs the dependencies in `scripts/`, checks the tier file, signs in with a wallet signature, and reports Imperial USDC plus wallet SOL. `node scripts/monitor.js --dry` scores markets and prints one JSON line with the orders it would send. `--dry` keeps that run read-only.
 
-Use `tiers/medium.json` or `tiers/high.json` the same way to switch tiers. A file named `STOP` in `scripts/` pauses new trades on later live runs.
+A file named `STOP` in a tier's `scripts/` folder pauses new trades for that tier only. State, the login token, logs, snapshots and the trade log all stay inside that tier's `scripts/` folder.
 
 ## Private key
 
-The key is only read from the environment (`IMPERIAL_SOL_PRIVATE_KEY`) and never logged. Pass it in the environment of the process. A login token is cached in `scripts/.token` with mode `0600`. That file, `config.json`, `.env`, and local state are listed in `.gitignore`.
+The key is only read from the environment variable named by `keyEnv` in `config.json` (e.g. `ARMADA_EASY_SOL_PRIVATE_KEY`); there is no fallback to any other name, and it is never logged. Pass it in the environment of the process. A login token is cached in `scripts/.token` with mode `0600`. That file, `config.json`, `.env`, and local state are listed in `.gitignore`.
 
 ## Tier comparison
 
@@ -70,7 +81,7 @@ The market counts above are the starter lists. Each tier file also has a `sugges
 
 ## Dashboard
 
-`dashboard/template.tsx` is the canvas for equity, P&L, volume, open positions, trade history, and the activity log. From the `scripts/` folder, `node dashboard.js` prints one JSON object built from the local snapshot, state, and trade log. Paste its `data` value over the placeholder after `const DATA = /*__DATA__*/` (keep `as any;`). `node dashboard.js --live` also includes season points when `IMPERIAL_SOL_PRIVATE_KEY` is set. The key is never printed.
+`dashboard/template.tsx` is the canvas for equity, P&L, volume, open positions, trade history, and the activity log. From the `scripts/` folder, `node dashboard.js` prints one JSON object built from the local snapshot, state, and trade log. Paste its `data` value over the placeholder after `const DATA = /*__DATA__*/` (keep `as any;`). `node dashboard.js --live` also includes season points when the tier's key is set. The key is never printed.
 
 ## Suggested markets
 
